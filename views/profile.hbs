@@ -1,0 +1,128 @@
+<link rel='stylesheet' href='/stylesheets/profilestyle.css' />
+
+<h3>Личный Кабинет</h3>
+<div class="container amin-panel">
+  {{#if adminUser}}
+  <div id="adminMap"></div>
+  <div class="row">
+    <form class="col s12" method="POST" action="/uploadfile">
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="tea_name" type="text" class="validate" name="name">
+          <label for="tea_name">Tea name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <textarea id="textarea1 tea_description" class="materialize-textarea" name="description"></textarea>
+          <label for="textarea1">Tea description</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="image_url" type="text" class="image_url" name="img">
+          <label for="image_url">Image URL</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input readonly id="coordinates" type="text" class="coordinates" name="placeBorn" placeholder="">
+          <label for="coordinates">Координаты</label>
+        </div>
+      </div>
+
+      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+        <i class="arrow_forward material-icons"></i>
+      </button>
+    </form>
+  </div>
+</div>
+<script src="https://api-maps.yandex.ru/2.1/?apikey=590945d5-041c-4771-8bf9-8ba09f726a73&lang=ru_RU"
+  type="text/javascript">
+  </script>
+<script type="text/javascript">
+  const inputCoordinates = document.getElementById('coordinates');
+  ymaps.ready(
+    () => {
+      const myMap = new ymaps.Map('adminMap', {
+        center: [55.76, 37.64],
+        zoom: 0,
+        controls: ['smallMapDefaultSet'],
+      }, {
+        restrictMapArea: [
+          [-67.744313, -166.585671],
+          [84.805306, -169.573952],
+        ],
+      });
+      myMap.behaviors.disable('scrollZoom');
+{{#each allTea}}
+  
+      MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+        '<div style="color: #FFFFFF; font-weight: bold;"></div>'
+      ),
+        myPlacemarkWithContent = new ymaps.Placemark([{{this.placeBorn}}], {
+          hintContent: '{{this.name}}',
+          balloonContentHeader: '<img src="{{this.img}}" width="50" height="50" alt="альтернативный текст">',
+          balloonContentBody: '{{this.name}}',
+          balloonContentFooter: '<a href = "http://localhost:3000/tea/delete/{{this.id}}">Удалить плантацию</a>',
+        }
+          , {
+            iconLayout: 'default#imageWithContent',
+            preset: 'islands#icon',
+          {{!-- iconImageHref: 'images/ball.png', --}} 
+    iconImageSize: [36, 36],
+    iconImageOffset: [-15, -30],
+    iconContentOffset: [15, 15],
+    iconContentLayout: MyIconContentLayout
+        });
+
+  myMap.geoObjects
+    .add(myPlacemarkWithContent);
+
+
+ 
+
+      {{/each}}
+
+      myMap.events.add('click', (e) => {
+    if (!myMap.balloon.isOpen()) {
+      const coords = e.get('coords');
+      myMap.balloon.open(coords, {
+        contentHeader: 'Добавить чай сюда',
+        contentFooter: '<sup>Щелкните еще раз</sup>',
+      });
+      inputCoordinates.value = `${coords[0].toPrecision(6)}, ${coords[1].toPrecision(6)}`
+    } else {
+      myMap.balloon.close();
+    }
+  });
+
+  myMap.events.add('contextmenu', (e) => {
+    myMap.hint.open(e.get('coords'), 'Кто-то щелкнул правой кнопкой');
+  });
+  myMap.events.add('balloonopen', (e) => {
+    myMap.hint.close();
+  });
+    });
+
+
+</script>
+{{/if}}
+<div class="profile-description">
+  {{#each allTeaObjectWithComment}}
+    <div>{{this.content}}</div>
+  {{/each}}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+ 

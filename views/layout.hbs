@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{{title}}</title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+  <script>src="/js/application.js"</script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <link rel="icon" type="image/png" href="https://example.com/favicon.png"/>
+</head>
+
+<body>
+<main class="page-main">
+    {{#if verifiedUser}}
+  <div class="container-menu nav-wrapper" id="header">
+    <div id="button_profile" class="button_main_page">
+          <form action="/users/profile" method="POST">
+            <button type="submit" class="waves-effect waves-light btn">Личный кабинет</button>
+          </form>
+    </div>
+
+    <div id="button_home" class="button_main_page brand-logo">
+            <form action="/" method="POST">
+              <button type="submit" class="waves-effect waves-light btn">Домой</button>
+            </form>
+    </div>
+      
+
+    <div id="button_logout" class="button_main_page">
+          <form action="/users/logout" method="POST">
+            <button type="submit" class="waves-effect waves-light btn">Выйти</button>
+          </form>
+    </div>
+  </div>
+
+
+
+        {{else}}
+  <div class="container-menu nav-wrapper" id="header">
+    <div id="button_login" class="button_main_page">
+          <form action="/users/trueLogin" method="POST">
+            <button type="submit" class="waves-effect waves-light btn">Войти</button>
+          </form>
+      </div>
+
+      
+        <div id="button_signup" class="button_main_page">
+          <form action="/users/trueRegister" method="POST">
+            <button type="submit" class="waves-effect waves-light btn">Регистрация</button>
+          </form>
+        </div>
+
+        <div id="button_home" class="button_main_page">
+          <form action="/" method="POST">
+            <button type="submit" class="waves-effect waves-light btn">Домой</button>
+          </form>
+        </div>
+  </div>
+      {{/if}}
+
+      
+        
+
+
+    {{{body}}}  
+
+
+</main>
+
+ <footer class="page-footer footer-copyright">
+          <div class="footer-copyright">
+            <div class="container">
+            © 2021 Copyright Text
+            <a class="grey-text text-lighten-4 right" href="#!">Elbrus Coding Bootcamp Team</a>
+            </div>
+          
+        </footer>
+
+</body>
+
+</html>

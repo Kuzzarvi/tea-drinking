@@ -1,0 +1,104 @@
+* {
+  margin:0;
+  padding: 0;
+}
+
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  overflow-y: scroll; 
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+}
+main {
+  flex: 1 0 auto;
+}
+
+h3 {
+  font-family: GillSans, Calibri, Trebuchet, sans-serif;
+  text-align: center;
+}
+a {
+  /* color: #00B7FF; */
+}
+
+#map {
+  width: 54%;
+  height: 600px;
+}
+
+
+#header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  background-color: rgb(238,110,115);
+
+}
+
+.button_main_page {
+  margin: 1cm;
+}
+
+.form {
+  text-align: center;
+  width: 30%;
+  margin: 0 auto;
+}
+.title {
+  margin: 40px;
+  text-align: center;
+  font-family: Helvetica, sans-serif;
+  text-transform: uppercase;
+  font-size: 40px;
+}
+.main-container {
+  margin: 0 auto;
+  padding: 20px 60px;
+  display: flex;
+  justify-content: space-around;
+}
+.main-content {
+  width: 36%;
+}
+
+.tea_name {
+  text-align: center;
+}
+
+.tea_image {
+  text-align: center;
+}
+
+.tea_description {
+  margin-top: 1cm;
+  margin-bottom: 2cm;
+  text-align: center;
+  font-size: 24px;
+}
+
+/* .teapage {
+  background-color: rgb(255, 255, 100);
+} */
+
+/* .form_to_comment_tea {
+  background-color: rgb(255, 255, 100);
+  
+} */
+
+.card {
+  background-color: rgb(255, 255, 100);
+}
+
+.commentcontent {
+  text-align: left;
+}
+.footer-copyright {
+  padding-bottom: 20px;
+  background-color: rgb(248, 86, 91)
+}
+
+.tea_image .activator {
+  width: 28%;
+}

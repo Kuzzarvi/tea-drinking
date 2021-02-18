@@ -1,0 +1,64 @@
+<div class="teapage">
+
+<div class="info_about_tea">
+
+  {{#with teaToShow}}
+
+  <div class="card">
+    <h1 class="tea_name">
+      {{name}}
+    </h1>
+    <div class="tea_image">
+      <img class="activator" src="{{img}}">
+    </div>
+    <div class="tea_description">
+      <p>{{description}}</p>
+    </div>
+
+   
+  </div>
+</div>
+
+<div class="comments">
+  {{#each comment}}
+
+    <h5>
+      {{this.author}}:
+    </h5>
+
+    <h6 class="commentcontent">
+      {{this.content}}
+      <div>комментарий оставлен{{this.commentData}}</div>
+    </h6>
+
+  {{/each}}
+</div>
+
+{{/with}}
+
+{{#with teaToShow}}
+
+<div class="center-form">
+  <div class="row form_to_comment_tea">
+    <form class="col s12" action='comment/{{this._id}}' method="POST">
+      <div class="row">
+        <div class="input-field col s6">
+          <textarea id="comment" type="text" class="validate field_to_add_comment" name="content"></textarea>
+          <label for="comment">Добавить комментарий:</label>
+        </div>
+      </div>
+    <button class="btn waves-effect waves-light" type="submit" name="action">Добавить
+        <i class="arrow_forward material-icons"></i>
+      </button>
+     
+     
+    </form>
+</div>
+
+</div>
+
+
+
+{{/with}}
+
+</div>

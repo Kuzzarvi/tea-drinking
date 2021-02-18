@@ -1,0 +1,77 @@
+<p class="title col s12">Welcome в клуб любителей чая</p>
+<div class="main-container row">
+  <div id="map"></div>
+  
+  <div class="main-content">
+    <h5>Чайные плантации со всего мира</h5>
+    <p>
+      Это клуб для любителей чая. Здесь вы найдете более 10 сортов вашего любимого чая ... вы найдёте чай на любой вкус, собранный на лучших плантациях мира. 
+      
+    </p><br>
+    <p>Мы отобрали для вас их лучшие виды и сорта!</p>
+  </div>
+
+<script src="https://api-maps.yandex.ru/2.1/?apikey=590945d5-041c-4771-8bf9-8ba09f726a73&lang=ru_RU"
+  type="text/javascript">
+  </script>
+  <div>
+    
+<script type="text/javascript">
+  ymaps.ready(
+    () => {
+      const myMap = new ymaps.Map('map', {
+        center: [55.76, 37.64],
+        zoom: 0,
+        controls: ['smallMapDefaultSet'],
+      }, {
+        restrictMapArea: [
+          [-67.744313, -166.585671],
+          [84.805306, -169.573952],
+        ],
+      });
+      ymaps.geolocation.get({
+        autoReverseGeocode: true,
+        provider: 'auto',
+        mapStateAutoApply: false
+      }).then(function (result) {
+        myMap.geoObjects.add(result.geoObjects);
+      });
+      myMap.behaviors.disable('scrollZoom');
+{{#each allTea}}
+  
+      MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
+        '<div style="color: #FFFFFF; font-weight: bold;"></div>'
+      ),
+      MyButtonLayout = ymaps.templateLayoutFactory.createClass(
+        "<div class ='test'>hello</div>"
+      )
+        myPlacemarkWithContent = new ymaps.Placemark([{{this.placeBorn}}], {
+          hintContent: '{{this.name}}',
+          balloonContentHeader: '<img src="{{this.img}}" width="50" height="50" alt="альтернативный текст">',
+          balloonContentBody: '{{this.name}}',
+          balloonContentFooter: '<a href = "http://localhost:3000/tea/{{this.id}}">Узнать больше</a>'
+        },
+           {
+            iconLayout: 'default#imageWithContent',
+            preset: 'islands#icon',
+          {{!-- iconImageHref: 'images/ball.png', --}} 
+    iconImageSize: [36, 36],
+    iconImageOffset: [-15, -30],
+    iconContentOffset: [15, 15],
+    iconContentLayout: MyIconContentLayout
+        });
+  myMap.geoObjects
+    .add(myPlacemarkWithContent);
+  myMap.events.add('contextmenu', (e) => {
+    myMap.hint.open(e.get('coords'), 'Кто-то щелкнул правой кнопкой');
+  });
+  myMap.events.add('balloonopen', (e) => {
+    myMap.hint.close();
+  });
+      {{/each}}
+    });
+</script>
+
+</div>
+</div>
+

@@ -1,0 +1,24 @@
+#adminMap {
+  width: 50%;
+  height: 550px;
+  margin-right: 50px;
+} 
+.container {
+  display: flex;
+  justify-content: space-between;
+}
+h3 {
+  text-align: center;
+}
+
+.teapage {
+  background-color: rgb(255, 255, 100);
+}
+
+.form_to_comment_tea {
+  background-color: rgb(255, 255, 100);
+}
+
+.card {
+  background-color: rgb(255, 255, 100);
+}
